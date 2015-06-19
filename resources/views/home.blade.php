@@ -9,15 +9,16 @@
 		@foreach ($chunk as $sub)
 			<div class="col-xs-12 col-md-4">
 				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="text-center"><a href="/r/{{ $sub->id }}">{{ $sub->name }}</a></h3>
+					</div>
 					<div class="panel-body">
-						<h3><a href="/r/{{ $sub->id }}">{{ $sub->name }}</a></h3>
-		
 						<ol>
-						@foreach ($sub->posts as $post)
-							<li>
-								<a href="/p/{{ $post->id }}">{{ $post->title }}</a>
-							</li>
-						@endforeach
+							@foreach ($sub->posts as $post)
+								<li>
+									<a href="/p/{{ $post->id }}">{{ $post->title }}</a>
+								</li>
+							@endforeach
 						</ol>
 					</div>
 				</div>
