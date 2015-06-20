@@ -11,6 +11,6 @@ class PostController extends CrudController
     public function show($id){
     	$post = Post::find($id);
     	$post->comments;
-    	return view('post')->with('post', $post);
+    	return view('post.show')->with('post', $post);
     }
 }
