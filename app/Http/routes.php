@@ -23,15 +23,17 @@ Route::get('/', function () {
 
 });
 
-Route::get('/register', 'UserController@getRegister');
-Route::post('/register', 'UserController@postRegister');
-
-Route::get('/login', 'AuthController@getLogin');
-Route::post('/login', 'AuthController@postLogin');
-Route::any('/logout', 'AuthController@anyLogout');
-
-Route::get('/r/{sub}', 'SubredditController@getSubreddit');
-Route::get('/p/{post}', 'SubredditController@getPost');
-
 Route::resource('/api/subreddit', 'SubredditController');
 Route::resource('/api/users', 'UserController');
+
+Route::any('/logout', 'AuthController@anyLogout');
+Route::get('/login', 'AuthController@getLogin');
+Route::post('/login', 'AuthController@postLogin');
+
+Route::get('/p/{post}', 'PostController@show');
+
+Route::get('/new-subreddit', 'SubredditController@create');
+Route::get('/r/{sub}', 'SubredditController@show');
+
+Route::get('/register', 'UserController@getRegister');
+Route::post('/register', 'UserController@postRegister');

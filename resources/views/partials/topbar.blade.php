@@ -13,6 +13,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     @if(Auth::check())
                         <li class="navbar-text">Welcome {{ Auth::user()->name }}</li>
+                        <li><a href="/new-subreddit">New Subreddit</a></li>
                         <li><a href="/logout">Log out</a></li>
                     @else
                         <li><a href="/register">Register</a></li>
