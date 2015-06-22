@@ -3,7 +3,7 @@
 @section('title', $sub->name)
 
 @section('topbar-menu')
-	<li><a href="/{{ $sub->id }}/new-post">New Post</a></li>
+	<li><a href="/r/{{ $sub->id }}/new-post">New Post</a></li>
 @endsection
 
 @section('content')

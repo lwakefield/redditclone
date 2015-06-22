@@ -31,8 +31,8 @@ Route::get('/login', 'AuthController@getLogin');
 Route::post('/login', 'AuthController@postLogin');
 
 Route::get('/p/{post}', 'PostController@show');
-Route::get('/{subreddit_id}/new-post', 'PostController@create');
-Route::post('/{subreddit_id}/new-post', 'PostController@newPost');
+Route::get('/r/{subreddit_id}/new-post', 'PostController@create');
+Route::post('/r/{subreddit_id}/new-post', 'PostController@newPost');
 
 Route::get('/r/{sub}', 'SubredditController@show');
 Route::get('/new-subreddit', 'SubredditController@create');
