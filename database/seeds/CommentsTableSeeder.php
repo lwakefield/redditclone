@@ -14,13 +14,10 @@ class CommentsTableSeeder extends Seeder
     public function run()
     {
         Comment::truncate();
-        $comment = factory('App\Comment')->create();
-        $post = Post::orderByRaw('RAND()')->first();
-        $post->comments()->save($comment);
-        foreach(range(1,1000) as $i)
-        {
-            $comment = factory('App\Comment')->create();
-            if(rand(0,1) == 0) {
+        $number_of_posts = Post::count();
+        $comments = factory('App\Comment')->times($number_of_posts)->create();
+        foreach ($comments as $comment) {
+            if (rand(0, 1) == 0) {
                 $post = Post::orderByRaw('RAND()')->first();
                 $post->comments()->save($comment);
             } else {

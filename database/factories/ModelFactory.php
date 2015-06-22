@@ -37,7 +37,7 @@ $factory->define(App\Post::class, function ($faker) {
     ];
 });
 
-$factory->define(App\Comment::class, function($faker) {
+$factory->define(App\Comment::class, function ($faker) {
     return [
         'content' => $faker->sentence(15),
         'score' => $faker->randomNumber(4),
