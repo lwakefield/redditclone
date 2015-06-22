@@ -2,6 +2,10 @@
 
 @section('title', 'Reddit Clone 2')
 
+@section('topbar-menu')
+	<li><a href="/new-subreddit">New Subreddit</a></li>
+@endsection
+
 @section('content')
 
 @foreach (array_chunk($subs->items(), 3) as $chunk)

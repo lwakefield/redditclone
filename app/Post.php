@@ -10,8 +10,8 @@ class Post extends BaseModel
     protected $rules = [
         'title' => 'required',
         'content' => 'required',
-        'score' => 'required|integer',
-        'user_id' => 'required|integer|exists:users,id',
+        // 'score' => 'required|integer',
+        // 'user_id' => 'required|integer|exists:users,id',
         'subreddit_id' => 'required|integer|exists:subreddits,id',
     ];
 
@@ -24,5 +24,4 @@ class Post extends BaseModel
     {
         return $this->morphMany('App\Comment', 'commentable');
     }
-
 }
