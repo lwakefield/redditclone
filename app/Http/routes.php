@@ -32,8 +32,9 @@ Route::post('/login', 'AuthController@postLogin');
 
 Route::get('/p/{post}', 'PostController@show');
 
-Route::get('/new-subreddit', 'SubredditController@create');
 Route::get('/r/{sub}', 'SubredditController@show');
+Route::get('/new-subreddit', 'SubredditController@create');
+Route::post('/new-subreddit', 'SubredditController@newSubreddit');
 
 Route::get('/register', 'UserController@getRegister');
 Route::post('/register', 'UserController@postRegister');

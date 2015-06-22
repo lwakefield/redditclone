@@ -10,7 +10,12 @@ class SubredditController extends CrudController
     protected $class_name = 'App\Subreddit';
 
     public function create() {
-        return 'hello';
+        return view('subreddit.create');
+    }
+
+    public function newSubreddit(){
+        $sub = $this->store();
+        return redirect('/r/'.$sub->id);
     }
 
     public function show($id) {
