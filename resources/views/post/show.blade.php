@@ -11,7 +11,7 @@
 
 <ul class="list-group">
 	@foreach ($post->comments as $comment)
-		@include('partials.comment', ['comment' => $comment])
+		@include('comment.partials.show', ['comment' => $comment])
 	@endforeach
 </ul>
 
