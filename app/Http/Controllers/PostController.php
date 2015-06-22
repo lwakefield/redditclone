@@ -16,7 +16,6 @@ class PostController extends CrudController
     public function newPost($subreddit_id)
     {
         $post = $this->store();
-        dd($post);
         return redirect('/p/'.$post->id);
     }
 

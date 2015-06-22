@@ -2,8 +2,11 @@
 
 @section('title', 'New Post')
 
-@section('content')
+@section('topbar-menu')
+	<li><a href="/{{ $subreddit_id }}/new-post">New Post</a></li>
+@endsection
 
+@section('content')
 <div class="row">
 	<form class="col-md-offset-4 col-md-4 panel panel-default" action="/{{ $subreddit_id }}/new-post" method="post">
 		<h1 class="text-center">New Post</h1>
@@ -20,5 +23,4 @@
 		</div>
 	</form>
 </div>
-
 @endsection

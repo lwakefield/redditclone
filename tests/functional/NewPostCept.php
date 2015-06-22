@@ -18,5 +18,5 @@ $I->fillField('title', $post_title);
 $I->fillField('content', $post_content);
 $I->click('Create', 'form');
 
-// $I->see($sub_name);
+$I->see($post_title);
 $I->seeRecord('posts', array('title' => $post_title, 'content' => $post_content));

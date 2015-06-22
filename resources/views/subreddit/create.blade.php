@@ -2,8 +2,11 @@
 
 @section('title', 'New Subreddit')
 
-@section('content')
+@section('topbar-menu')
+	<li><a href="/new-subreddit">New Subreddit</a></li>
+@endsection
 
+@section('content')
 <div class="row">
 	<form class="col-md-offset-4 col-md-4 panel panel-default" action="/new-subreddit" method="post">
 		<h1 class="text-center">New Subreddit</h1>
@@ -19,5 +22,4 @@
 		</div>
 	</form>
 </div>
-
 @endsection

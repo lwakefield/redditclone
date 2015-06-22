@@ -2,16 +2,23 @@
 
 namespace App;
 
+use Auth;
+
 class Post extends BaseModel
 {
+    
+    public function __construct()
+    {
+        parent::__construct();
+        $this->user_id = Auth::user()->id;
+    }
 
     protected $fillable = ['title', 'content', 'score', 'user_id', 'subreddit_id'];
 
     protected $rules = [
         'title' => 'required',
         'content' => 'required',
-        // 'score' => 'required|integer',
-        // 'user_id' => 'required|integer|exists:users,id',
+        'user_id' => 'required|integer|exists:users,id',
         'subreddit_id' => 'required|integer|exists:subreddits,id',
     ];
 

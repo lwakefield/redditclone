@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="jumbotron">
-	<h1 class="text-center"><a href="/r/{{ $post->id }}">{{ $post->title }}</a></h1>
+	<h1 class="text-center"><a href="/p/{{ $post->id }}">{{ $post->title }}</a></h1>
 	<p>{{ $post->content }}</p>
 </div>
 
