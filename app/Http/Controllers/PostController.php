@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Post;
 
+use Auth;
+use Input;
+
 class PostController extends CrudController
 {
     protected $class_name = 'App\Post';
@@ -15,6 +18,7 @@ class PostController extends CrudController
 
     public function newPost($subreddit_id)
     {
+        Input::merge(['user_id' => Auth::id()]);
         $post = $this->store();
         return redirect('/p/'.$post->id);
     }

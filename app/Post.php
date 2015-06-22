@@ -12,6 +12,7 @@ class Post extends BaseModel
     protected $rules = [
         'title' => 'required',
         'content' => 'required',
+        'user_id' => 'required|integer|exists:users,id',
         'subreddit_id' => 'required|integer|exists:subreddits,id',
     ];
 
