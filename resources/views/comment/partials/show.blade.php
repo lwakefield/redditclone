@@ -1,6 +1,12 @@
 <li class="list-group-item">
 	<div class="row">
-		<div class="col-xs-10">
+		<div class="col-xs-1">
+			<div class="btn-group-vertical">
+				<button class="btn btn-default btn-xs glyphicon glyphicon-chevron-up"></button>
+				<button class="btn btn-default btn-xs glyphicon glyphicon-chevron-down"></button>
+			</div>
+		</div>
+		<div class="col-xs-9">
 			<p>{{ $comment->content }}</p>
 		</div>
 		<div class="col-xs-2">
