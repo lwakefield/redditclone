@@ -6,10 +6,14 @@ use App\Post;
 
 use Auth;
 use Input;
+use App\Factories\CrudRepositoryFactory;
 
-class PostController extends CrudController
+class PostController extends Controller
 {
-    protected $class_name = 'App\Post';
+    public function __construct()
+    {
+        $this->repo = CrudRepositoryFactory::make('Post');
+    }
 
     public function create($subreddit_id)
     {
@@ -19,13 +23,13 @@ class PostController extends CrudController
     public function newPost($subreddit_id)
     {
         Input::merge(['user_id' => Auth::id()]);
-        $post = $this->store();
+        $post = $this->repo->create();
         return redirect('/p/'.$post->id);
     }
 
     public function show($id)
     {
-        $post = Post::find($id);
+        $post = $this->repo->retrieve($id);
         $post->comments;
         return view('post.show')->with('post', $post);
     }

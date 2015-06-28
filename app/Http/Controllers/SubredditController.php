@@ -4,10 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Subreddit;
 use App\Post;
+use App\Factories\CrudRepositoryFactory;
 
-class SubredditController extends CrudController
+class SubredditController extends Controller
 {
-    protected $class_name = 'App\Subreddit';
+
+    public function __construct()
+    {
+        $this->repo = CrudRepositoryFactory::make('Subreddit');
+    }
 
     public function create()
     {
@@ -16,13 +21,13 @@ class SubredditController extends CrudController
 
     public function newSubreddit()
     {
-        $sub = $this->store();
+        $sub = $this->repo->create();
         return redirect('/r/'.$sub->id);
     }
 
     public function show($id)
     {
-        $sub = Subreddit::find($id);
+        $sub = $this->repo->retrieve($id);
         $posts = $this->getPostsFromSub($sub);
         $pagination_render = $this->getPaginationRenderFromSub($sub);
         return view('subreddit.show')->with([

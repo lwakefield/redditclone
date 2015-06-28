@@ -11,6 +11,8 @@
 |
 */
 
+use App\Factories\CrudRepositoryFactory;
+
 Route::get('/', function () {
     $subs = App\Subreddit::paginate(12);
     foreach ($subs as $sub) {

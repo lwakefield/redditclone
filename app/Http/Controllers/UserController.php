@@ -5,26 +5,32 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Exceptions\ValidationException;
+use App\Factories\CrudRepositoryFactory;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Auth;
 use Input;
 
-class UserController extends CrudController
+class UserController extends Controller
 {
-    protected $class_name = 'App\User';
+    public function __construct()
+    {
+        $this->repo = CrudRepositoryFactory::make('User');
+    }
 
-    public function getRegister() {
+    public function getRegister()
+    {
         return view('register');
     }
 
-    public function postRegister() {
+    public function postRegister()
+    {
         try {
-            $user = $this->store();
+            $user = $this->repo->create();
             Auth::login($user);
             return redirect('/');
-        } catch(ValidationException $e) {
+        } catch (ValidationException $e) {
             return back()->withInput()->with('errors', $e->errors);
         }
     }
