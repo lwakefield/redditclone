@@ -24,13 +24,14 @@ class CommentController extends Controller
     {
         Input::merge(['user_id' => Auth::id()]);
         $child = $this->commentRepo->create();
-        $parent = $this->commentRepo->retrieve($id);
+        $parent = $this->postRepo->retrieve($id);
         $parent->comments()->save($child);
         return redirect()->back();
     }
 
     public function newCommentOnComment($id)
     {
+        Input::merge(['user_id' => Auth::id()]);
         $child = $this->commentRepo->create();
         $parent = $this->commentRepo->retrieve($id);
         $parent->comments()->save($child);

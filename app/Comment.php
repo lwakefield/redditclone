@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends BaseModel
 {
     protected $fillable = ['content', 'score', 'user_id'];
+    protected $rules = [
+        'content' => 'required',
+        'user_id' => 'required|integer|exists:users,id',
+    ];
+
 
     public function commentable()
     {

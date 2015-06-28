@@ -36,6 +36,7 @@ abstract class BaseModel extends Model
         if (isset($this->rules)) {
             $validator = Validator::make($this->getAttributes(), $this->rules);
             if ($validator->fails()) {
+                dd($validator->errors());
                 throw new ValidationException('Error validating model', $validator->errors());
             }
         }
