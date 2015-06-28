@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Factories\CrudRepositoryFactory;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
+use Auth;
+use Input;
 
 class CommentController extends Controller
 {
@@ -18,6 +22,7 @@ class CommentController extends Controller
 
     public function newCommentOnPost($id)
     {
+        Input::merge(['user_id' => Auth::id()]);
         $child = $this->commentRepo->create();
         $parent = $this->commentRepo->retrieve($id);
         $parent->comments()->save($child);

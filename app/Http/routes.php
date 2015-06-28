@@ -43,5 +43,5 @@ Route::post('/new-subreddit', 'SubredditController@newSubreddit');
 Route::get('/register', 'UserController@getRegister');
 Route::post('/register', 'UserController@postRegister');
 
-Route::get('/p/{post}/reply', 'CommentController@newCommentOnPost');
-Route::get('/c/{comment}/reply', 'CommentController@newCommentOnComment');
+Route::post('/p/{post}/reply', 'CommentController@newCommentOnPost');
+Route::post('/c/{comment}/reply', 'CommentController@newCommentOnComment');
