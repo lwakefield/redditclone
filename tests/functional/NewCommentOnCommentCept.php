@@ -8,7 +8,7 @@ $post->comments()->save($parent_comment);
 $child_comment = factory('App\Comment')->make();
 
 $I = new FunctionalTester($scenario);
-$I->wantTo('Comment on a post');
+$I->wantTo('Comment on a comment');
 $I->amLoggedAs($user);
 $I->amOnPage('/p/'.$post->id);
 $I->see($post->title);

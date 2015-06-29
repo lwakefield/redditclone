@@ -18,25 +18,31 @@ class CommentController extends Controller
     {
         $this->commentRepo = CrudRepositoryFactory::make('Comment');
         $this->postRepo = CrudRepositoryFactory::make('Post');
+        $this->voteRepo = CrudRepositoryFactory::make('Vote');
     }
 
-    public function newCommentOnPost($id)
+    public function newVoteOnPost($id)
     {
         $post = $this->postRepo->retrieve($id);
-        return $this->newCommentOnModel($post);
+        return $this->newVoteOnModel($post);
     }
 
-    public function newCommentOnComment($id)
+    public function newVoteOnComment($id)
     {
         $comment = $this->commentRepo->retrieve($id);
-        return $this->newCommentOnModel($comment);
+        return $this->newVoteOnModel($comment);
     }
 
-    protected function newCommentOnModel($parent)
+    protected function newVoteOnModel($parent)
     {
         Input::merge(['user_id' => Auth::id()]);
-        $comment = $this->commentRepo->create();
-        $parent->comments()->save($comment);
+        $vote = $this->voteRepo->create();
+        $parent->votes()->save($vote);
+
+        $up_votes = $parent->votes()->where('dir', '>', '0')->count();
+        $down_votes = $parent->votes()->where('dir', '<', '0')->count();
+        $parent->score = $up_votes + $down_votes;
+
         return redirect()->back();
     }
 }
