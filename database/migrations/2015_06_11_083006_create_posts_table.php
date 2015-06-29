@@ -19,7 +19,7 @@ class CreatePostsTable extends Migration
             $table->integer('subreddit_id');
             $table->string('title');
             $table->string('content');
-            $table->integer('score');
+            $table->integer('score')->default(0);
             $table->timestamps();
         });
     }

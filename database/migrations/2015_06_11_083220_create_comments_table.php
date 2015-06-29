@@ -13,13 +13,13 @@ class CreateCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function(Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('commentable_id');
             $table->string('commentable_type');
             $table->string('content');
-            $table->integer('score');
+            $table->integer('score')->default(0);
             $table->timestamps();
         });
     }
