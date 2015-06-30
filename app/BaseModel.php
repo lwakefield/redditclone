@@ -22,7 +22,7 @@ abstract class BaseModel extends Model
         });
     }
 
-    public function populate()
+    protected function populate()
     {
         foreach (Input::all() as $key => $val) {
             if (in_array($key, $this->fillable)) {
@@ -31,7 +31,7 @@ abstract class BaseModel extends Model
         }
     }
 
-    public function validate()
+    protected function validate()
     {
         if (isset($this->rules)) {
             $validator = Validator::make($this->getAttributes(), $this->rules);

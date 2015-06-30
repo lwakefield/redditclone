@@ -20,19 +20,19 @@ class CommentController extends Controller
         $this->postRepo = CrudRepositoryFactory::make('Post');
     }
 
-    public function newCommentOnPost($id)
+    public function commentOnPost($id)
     {
         $post = $this->postRepo->retrieve($id);
-        return $this->newCommentOnModel($post);
+        return $this->commentOnModel($post);
     }
 
-    public function newCommentOnComment($id)
+    public function commentOnComment($id)
     {
         $comment = $this->commentRepo->retrieve($id);
-        return $this->newCommentOnModel($comment);
+        return $this->commentOnModel($comment);
     }
 
-    protected function newCommentOnModel($parent)
+    protected function commentOnModel($parent)
     {
         Input::merge(['user_id' => Auth::id()]);
         $comment = $this->commentRepo->create();
