@@ -1,6 +1,7 @@
 <?php
-
 namespace App\Repositories;
+
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CrudRepository
 {
@@ -20,6 +21,21 @@ class CrudRepository
     public function retrieve($id)
     {
         return $this->getFreshModel()->findOrFail($id);
+    }
+
+    public function updateOrCreate($attributes)
+    {
+        try {
+            $query = $this->getFreshModel();
+            foreach ($attributes as $key => $val) {
+                $query = $query->where($key, '=', $val);
+            }
+            $model = $query->firstOrFail();
+            $model->save();
+            return $model;
+        } catch (ModelNotFoundException $e) {
+            return $this->create();
+        }
     }
     
     public function update($id)

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Factories\CrudRepositoryFactory;
 use App\Post;
 
 use Auth;
 use Input;
-use App\Factories\CrudRepositoryFactory;
 
 class PostController extends Controller
 {

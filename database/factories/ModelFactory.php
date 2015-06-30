@@ -44,3 +44,11 @@ $factory->define(App\Comment::class, function ($faker) {
         'user_id' => App\User::orderByRaw('RAND()')->first()->id,
     ];
 });
+
+$factory->define(App\Comment::class, function ($faker) {
+    return [
+        'content' => $faker->sentence(15),
+        'score' => $faker->randomNumber(4),
+        'user_id' => App\User::orderByRaw('RAND()')->first()->id,
+    ];
+});

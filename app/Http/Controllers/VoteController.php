@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use Input;
 
-class CommentController extends Controller
+class VoteController extends Controller
 {
 
     public function __construct()
@@ -21,28 +21,41 @@ class CommentController extends Controller
         $this->voteRepo = CrudRepositoryFactory::make('Vote');
     }
 
-    public function newVoteOnPost($id)
+    public function voteOnPost($id)
     {
         $post = $this->postRepo->retrieve($id);
-        return $this->newVoteOnModel($post);
+        return $this->voteOnModel($post);
     }
 
-    public function newVoteOnComment($id)
+    public function voteOnComment($id)
     {
         $comment = $this->commentRepo->retrieve($id);
-        return $this->newVoteOnModel($comment);
+        return $this->voteOnModel($comment);
     }
 
-    protected function newVoteOnModel($parent)
+    protected function voteOnModel($parent)
     {
         Input::merge(['user_id' => Auth::id()]);
-        $vote = $this->voteRepo->create();
+        $vote = $this->voteRepo->updateOrCreate([
+            'voteable_type' => get_class($parent),
+            'voteable_id' => $parent->id,
+            'user_id' => Auth::id()
+        ]);
         $parent->votes()->save($vote);
 
-        $up_votes = $parent->votes()->where('dir', '>', '0')->count();
-        $down_votes = $parent->votes()->where('dir', '<', '0')->count();
-        $parent->score = $up_votes + $down_votes;
+        $up_votes = $parent->votes()->where('direction', '>', '0')->count();
+        $down_votes = $parent->votes()->where('direction', '<', '0')->count();
+        $parent->score = $up_votes - $down_votes;
+        $parent->save();
 
         return redirect()->back();
+    }
+
+    protected function getVote($parent)
+    {
+        try {
+            Input::merge(['user_id' => Auth::id()]);
+        } catch (Exception $e) {
+        }
     }
 }

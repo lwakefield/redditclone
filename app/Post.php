@@ -25,4 +25,9 @@ class Post extends BaseModel
     {
         return $this->morphMany('App\Comment', 'commentable');
     }
+
+    public function votes()
+    {
+        return $this->morphMany('App\Vote', 'voteable');
+    }
 }

@@ -45,3 +45,6 @@ Route::post('/register', 'UserController@postRegister');
 
 Route::post('/p/{post}/reply', 'CommentController@newCommentOnPost');
 Route::post('/c/{comment}/reply', 'CommentController@newCommentOnComment');
+
+Route::post('/p/{post}/vote', 'VoteController@voteOnPost');
+Route::post('/c/{comment}/vote', 'VoteController@voteOnComment');
