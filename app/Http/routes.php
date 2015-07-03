@@ -15,26 +15,53 @@ use App\Factories\CrudRepositoryFactory;
 
 Route::get('/', 'HomeController@index');
 
-Route::resource('/api/subreddit', 'SubredditController');
-Route::resource('/api/users', 'UserController');
-
 Route::any('/logout', 'AuthController@anyLogout');
 Route::get('/login', 'AuthController@getLogin');
 Route::post('/login', 'AuthController@postLogin');
 
 Route::get('/p/{post}', 'PostController@show');
-Route::get('/r/{subreddit_id}/new-post', 'PostController@create');
-Route::post('/r/{subreddit_id}/new-post', 'PostController@newPost');
+Route::get('/r/{subreddit_id}/new-post', [
+    'uses' => 'PostController@create',
+    'middleware' => 'auth'
+]);
+Route::post('/r/{subreddit_id}/new-post', [
+    'uses' => 'PostController@newPost',
+    'middleware' => 'auth'
+]);
 
 Route::get('/r/{sub}', 'SubredditController@show');
-Route::get('/new-subreddit', 'SubredditController@create');
-Route::post('/new-subreddit', 'SubredditController@newSubreddit');
+Route::get('/new-subreddit', [
+    'uses' => 'SubredditController@create',
+    'middleware' => 'auth'
+]);
+Route::post('/new-subreddit', [
+    'uses' => 'SubredditController@newSubreddit',
+    'middleware' => 'auth'
+]);
 
-Route::get('/register', 'UserController@getRegister');
-Route::post('/register', 'UserController@postRegister');
+Route::get('/register', [
+    'uses' => 'UserController@getRegister',
+    'middleware' => 'guest'
+]);
+Route::post('/register', [
+    'uses' => 'UserController@postRegister',
+    'middleware' => 'guest'
+]);
 
-Route::post('/p/{post}/reply', 'CommentController@commentOnPost');
-Route::post('/c/{comment}/reply', 'CommentController@commentOnComment');
+Route::post('/p/{post}/reply', [
+    'uses' => 'CommentController@commentOnPost',
+    'middleware' => 'auth'
+]);
+Route::post('/c/{comment}/reply', [
+    'uses' => 'CommentController@commentOnComment',
+    'middleware' => 'auth'
+]);
 
-Route::post('/p/{post}/vote', 'VoteController@voteOnPost');
-Route::post('/c/{comment}/vote', 'VoteController@voteOnComment');
+Route::post('/p/{post}/vote', [
+    'uses' => 'VoteController@voteOnPost',
+    'middleware' => 'auth'
+]);
+Route::post('/c/{comment}/vote', [
+    'uses' => 'VoteController@voteOnComment',
+    'middleware' => 'auth'
+]);
