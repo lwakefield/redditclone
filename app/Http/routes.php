@@ -13,16 +13,7 @@
 
 use App\Factories\CrudRepositoryFactory;
 
-Route::get('/', function () {
-    $subs = App\Subreddit::paginate(12);
-    foreach ($subs as $sub) {
-        $sub->load(['posts' => function ($query) {
-            $query->limit(5);
-        }]);
-    }
-    return view('home')
-        ->with(['subs' => $subs]);
-});
+Route::get('/', 'HomeController@index');
 
 Route::resource('/api/subreddit', 'SubredditController');
 Route::resource('/api/users', 'UserController');
