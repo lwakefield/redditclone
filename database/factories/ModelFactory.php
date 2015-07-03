@@ -38,17 +38,28 @@ $factory->define(App\Post::class, function ($faker) {
 });
 
 $factory->define(App\Comment::class, function ($faker) {
+    if (App\Comment::count()) {
+        $model_class = rand(0,1) ? App\Post::class : App\Comment::class;
+    } else {
+        $model_class = App\Post::class;
+    }
+    $model_instance = new $model_class;
     return [
         'content' => $faker->sentence(15),
         'score' => $faker->randomNumber(4),
         'user_id' => App\User::orderByRaw('RAND()')->first()->id,
+        'commentable_type' => $model_class,
+        'commentable_id' => $model_instance->newQuery()->orderByRaw('RAND()')->first()->id
     ];
 });
 
-$factory->define(App\Comment::class, function ($faker) {
+$factory->define(App\Vote::class , function ($faker) {
+    $model_class = rand(0,1) ? App\Post::class : App\Comment::class;
+    $model_instance = new $model_class;
     return [
-        'content' => $faker->sentence(15),
-        'score' => $faker->randomNumber(4),
+        'dir' => rand(0,1) ? -1 : 1,
         'user_id' => App\User::orderByRaw('RAND()')->first()->id,
+        'commentable_type' => $model_class,
+        'commentable_id' => $model_instance->newQuery()->orderByRaw('RAND()')->first()->id
     ];
 });

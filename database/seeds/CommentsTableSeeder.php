@@ -14,16 +14,9 @@ class CommentsTableSeeder extends Seeder
     public function run()
     {
         Comment::truncate();
-        $number_of_posts = Post::count();
-        $comments = factory('App\Comment')->times($number_of_posts)->create();
-        foreach ($comments as $comment) {
-            if (rand(0, 1) == 0) {
-                $post = Post::orderByRaw('RAND()')->first();
-                $post->comments()->save($comment);
-            } else {
-                $parent = Comment::orderByRaw('RAND()')->first();
-                $parent->comments()->save($comment);
-            }
+        // We don't use times(), because comment has a recurisve relation to itself
+        foreach (range(1, 1000) as $i) {
+            factory('App\Comment')->create();
         }
     }
 }

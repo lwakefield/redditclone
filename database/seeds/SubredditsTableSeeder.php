@@ -13,6 +13,6 @@ class SubredditsTableSeeder extends Seeder
     public function run()
     {
         Subreddit::truncate();
-        factory('App\Subreddit')->times(30)->create();
+        factory('App\Subreddit')->times(20)->create();
     }
 }

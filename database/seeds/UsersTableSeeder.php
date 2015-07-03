@@ -14,6 +14,6 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         User::truncate();
-        factory('App\User')->times(30)->create();
+        factory('App\User')->times(10)->create();
     }
 }
