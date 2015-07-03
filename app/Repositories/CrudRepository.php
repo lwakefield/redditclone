@@ -11,6 +11,11 @@ class CrudRepository
         $this->model_name = $model_name;
     }
 
+    public function index()
+    {
+        return $this->getFreshModel()->paginate();
+    }
+
     public function create()
     {
         $model = $this->getFreshModel();
