@@ -17,8 +17,8 @@ abstract class BaseModel extends Model
         parent::boot();
 
         static::saving(function (BaseModel $model) {
-            $model->populate();
             $model->validate();
+            $model->populate();
         });
     }
 
@@ -34,10 +34,15 @@ abstract class BaseModel extends Model
     protected function validate()
     {
         if (isset($this->rules)) {
-            $validator = Validator::make($this->getAttributes(), $this->rules);
+            $validator = Validator::make($this->getProposedAttributes(), $this->rules);
             if ($validator->fails()) {
                 throw new ValidationException('Error validating model', $validator->errors());
             }
         }
+    }
+
+    protected function getProposedAttributes()
+    {
+        return array_merge($this->getAttributes(), Input::all());
     }
 }

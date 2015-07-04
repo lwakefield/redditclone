@@ -17,8 +17,9 @@ class User extends BaseModel implements AuthenticatableContract, CanResetPasswor
 
     public function getRulesAttribute(){
         return [
+            'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $this->id,
-            'password' => 'required'
+            'password' => 'required|min:8'
         ];
     }
 
