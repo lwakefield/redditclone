@@ -1,5 +1,5 @@
 <li class="list-group-item">
-	<div class="row">
+	<div class="row panel-body">
 		<div class="col-xs-1">
 			@include('vote.create', ['action' => "/c/$comment->id/vote", 'score' => $comment->score])
 		</div>
@@ -19,3 +19,4 @@
 		</ul>
 	@endif
 </li>
+
