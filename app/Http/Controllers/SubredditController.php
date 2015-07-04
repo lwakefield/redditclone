@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Subreddit;
 use App\Post;
+use App\Exceptions\ValidationException;
 use App\Factories\CrudRepositoryFactory;
 
 class SubredditController extends Controller
@@ -21,8 +22,12 @@ class SubredditController extends Controller
 
     public function newSubreddit()
     {
-        $sub = $this->repo->create();
-        return redirect('/r/'.$sub->id);
+        try {
+            $sub = $this->repo->create();
+            return redirect('/r/'.$sub->id);
+        } catch (ValidationException $e) {
+            return back()->withInput()->with('errors', $e->errors);
+        }
     }
 
     public function show($id)

@@ -50,12 +50,4 @@ class VoteController extends Controller
 
         return redirect()->back();
     }
-
-    protected function getVote($parent)
-    {
-        try {
-            Input::merge(['user_id' => Auth::id()]);
-        } catch (Exception $e) {
-        }
-    }
 }

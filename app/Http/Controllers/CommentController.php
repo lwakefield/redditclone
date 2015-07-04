@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Exceptions\ValidationException;
 use App\Factories\CrudRepositoryFactory;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -34,9 +35,13 @@ class CommentController extends Controller
 
     protected function commentOnModel($parent)
     {
-        Input::merge(['user_id' => Auth::id()]);
-        $comment = $this->commentRepo->create();
-        $parent->comments()->save($comment);
-        return redirect()->back();
-    }
+        try {
+            Input::merge(['user_id' => Auth::id()]);
+            $comment = $this->commentRepo->create();
+            $parent->comments()->save($comment);
+            return redirect()->back();
+        } catch (ValidationException $e) {
+            return back()->withInput()->with('errors', $e->errors);
+        }
+   }
 }

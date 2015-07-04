@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\ValidationException;
 use App\Factories\CrudRepositoryFactory;
 use App\Post;
 
@@ -22,10 +23,14 @@ class PostController extends Controller
 
     public function newPost($subreddit_id)
     {
-        Input::merge(['user_id' => Auth::id()]);
-        $post = $this->repo->create();
-        return redirect('/p/'.$post->id);
-    }
+        try {
+            Input::merge(['user_id' => Auth::id()]);
+            $post = $this->repo->create();
+            return redirect('/p/'.$post->id);
+        } catch (ValidationException $e) {
+            return back()->withInput()->with('errors', $e->errors);
+        }
+   }
 
     public function show($id)
     {

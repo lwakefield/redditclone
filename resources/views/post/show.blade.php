@@ -4,6 +4,7 @@
 
 @section('content')
 
+@include('partials.errors')
 <div class="jumbotron">
     <div class="row">
 		<div class="col-xs-1">

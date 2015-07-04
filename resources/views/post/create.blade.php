@@ -8,6 +8,7 @@
 
 @section('content')
 <div class="row">
+    @include('partials.errors')
 	<form class="col-md-offset-4 col-md-4 panel panel-default" action="/r/{{ $subreddit_id }}/new-post" method="post">
 		<h1 class="text-center">New Post</h1>
 		{!! csrf_field() !!}
