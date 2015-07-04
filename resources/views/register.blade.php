@@ -3,13 +3,7 @@
 @section('content')
 
 <div class="row">
-	@if (count($errors))
-		<div class="alert alert-danger" role="alert">
-			@foreach($errors->all() as $error)
-				{{ $error }}
-			@endforeach
-		</div>
-	@endif
+    @include('partials.errors')
 	<form class="col-md-offset-4 col-md-4 panel panel-default" action="/register" method="post">
 		<h1 class="text-center">Register</h1>
 		{!! csrf_field() !!}

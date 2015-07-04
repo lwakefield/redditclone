@@ -3,6 +3,7 @@
 @section('content')
 
 <div class="row">
+    @include('partials.errors')
 	<form class="col-md-offset-4 col-md-4 panel panel-default" action="/login" method="post">
 		<h1 class="text-center">Login</h1>
 		{!! csrf_field() !!}
