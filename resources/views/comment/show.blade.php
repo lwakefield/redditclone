@@ -7,7 +7,11 @@
 			<p>{{ $comment->content }}</p>
 		</div>
 		<div class="col-xs-2">
-			<button class="btn btn-default btn-xs pull-right" data-toggle="collapse" data-target=".c{{ $comment->id }}">Reply</button>
+            @if (Auth::check())
+                <button class="btn btn-default btn-xs pull-right" data-toggle="collapse" data-target=".c{{ $comment->id }}">Reply</button>
+            @else
+                <a class="btn btn-default btn-xs pull-right" href="/login">Reply</a>
+            @endif
 		</div>
 	</div>
 	@include('comment.create', ['comment_id' => $comment->id, 'score' => $comment->score])
